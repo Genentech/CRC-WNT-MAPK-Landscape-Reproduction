@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: >-
+  If you use this software, please cite it using the metadata below, and cite the
+  accompanying manuscript and data record listed in the README.
+type: software
+title: "CRC WNT-MAPK analysis workflow on the synthetic cohort"
+abstract: >-
+  Analysis workflow that computes the source data of 29 figure panels of "Mutation
+  architectures define a WNT-MAPK transcriptional landscape in colorectal cancer" on the
+  synthetic cohort deposited on Zenodo (https://doi.org/10.5281/zenodo.23055294). It sets
+  up a workspace with the synthetic cohort and the oncophenomap package and runs every
+  panel. The synthetic cohort contains no real patients, and its results are not
+  biological or clinical findings.
+authors:
+  - given-names: Camilo
+    family-names: Espinosa Bernal
+    affiliation: "Genentech, Inc."
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+  - given-names: Sandra
+    family-names: Melo Carlos
+    affiliation: "Genentech, Inc."
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+version: 0.1.0
+date-released: "2026-10-15"
+license: MIT
+repository-code: "https://github.com/Genentech/CRC-WNT-MAPK-Landscape-Reproduction"
+keywords:
+  - colorectal cancer
+  - WNT
+  - MAPK
+  - transcriptional programs
+  - reproducibility
+  - synthetic data
