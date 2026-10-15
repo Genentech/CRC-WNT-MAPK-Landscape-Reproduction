@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crc-wnt-mapk-reproduction"
+version = "0.1.0"
+description = "Synthetic-cohort reproduction of the CRC WNT-MAPK transcriptional landscape analyses."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = [
+    "numpy>=1.23",
+    "pandas>=1.5",
+    "pyarrow",
+    "scikit-learn>=1.2",
+    "scipy",
+    "lifelines>=0.27",
+    "gseapy>=1.1",
+    "joblib",
+    "threadpoolctl",
+    "tqdm",
+    # `oncophenomap` (needed by the 15 taxonomy/clinical panels) is installed from its
+    # own repository; see the README and setup_workspace.py.
+]
+
+[project.urls]
+Repository = "https://github.com/Genentech/CRC-WNT-MAPK-Landscape-Reproduction"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["reproduce*"]
+
+[tool.setuptools.package-data]
+"reproduce" = ["expected_columns.json"]

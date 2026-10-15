@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.ipynb_checkpoints/
+.ruff_cache/
+
+# Downloaded data and generated outputs stay out of the repository.
+data/
+out/
+crc_workspace/

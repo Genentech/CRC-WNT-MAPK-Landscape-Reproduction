@@ -1,0 +1,20 @@
+# Versions pinned to the environment the workflow was tested with.
+name: crc-wnt-mapk-reproduction
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy=2.2
+  - pandas=2.2
+  - pyarrow=24.0
+  - scikit-learn=1.8
+  - scipy=1.17
+  - joblib=1.5
+  - threadpoolctl=3.6
+  - tqdm=4.67
+  - matplotlib=3.10
+  - seaborn=0.13
+  - pip
+  - pip:
+      - lifelines==0.30.0
+      - gseapy==1.1.9
