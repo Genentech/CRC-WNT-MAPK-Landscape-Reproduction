@@ -125,11 +125,20 @@ python -m unittest discover -s tests
 ```
 
 The full-run test executes only when `SYNTHCRC_SYNTHETIC_DIR` points to the extracted cohort and
-`oncophenomap` is installed.
+`oncophenomap` is installed. To also run oncophenomap's own tests, install it with its development
+extra and run `pytest` in its folder:
+
+```bash
+pip install -e "crc_workspace/oncophenomap[dev]"
+cd crc_workspace/oncophenomap && python -m pytest
+```
 
 ## Citation
 
-If you use this software, please cite the manuscript and the data record:
+If you use this software, please cite it, the manuscript, the data record and `oncophenomap`:
+
+> Espinosa Bernal C, Melo Carlos S. *CRC WNT-MAPK analysis workflow on the synthetic cohort.*
+> Zenodo. https://doi.org/10.5281/zenodo.23403247
 
 > Espinosa C, et al. *Mutation architectures define a WNT-MAPK transcriptional landscape in
 > colorectal cancer.* Manuscript submitted.
@@ -137,7 +146,11 @@ If you use this software, please cite the manuscript and the data record:
 > Espinosa C, et al. *Data for Mutation architectures define a WNT-MAPK transcriptional landscape
 > in colorectal cancer.* Zenodo. https://doi.org/10.5281/zenodo.23055294
 
-A citation for the software itself will be added here when its release is archived.
+> Espinosa Bernal C, Melo Carlos S. *oncophenomap: genotype-phenotype maps and tree-based
+> variance decomposition.* Zenodo. https://doi.org/10.5281/zenodo.23403256
+
+These DOIs always resolve to the latest release; each release also has its own
+version DOI on Zenodo.
 
 ## License
 

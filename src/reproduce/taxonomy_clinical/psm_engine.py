@@ -44,8 +44,8 @@ def build_ps_covariates(
     clinical: pd.DataFrame, mutations: pd.DataFrame, mega_cluster: pd.Series
 ) -> pd.DataFrame:
     """The PS covariates: age, purity, msi_h, sex_male, 2 sidedness dummies
-    (drop-first: 3 categories -> 2 dummies), 5 biopsy-site dummies, and one dummy per
-    megacluster assigned by the tree (8 on the deposited cohort, so 19 in total)."""
+    (drop-first: 3 categories -> 2 dummies), 5 biopsy-site dummies and 9 megacluster
+    dummies (20 in total)."""
     df = pd.DataFrame(index=clinical.index)
     df["age"] = clinical["age"].astype(float)
     df["purity"] = clinical["purity"].astype(float)

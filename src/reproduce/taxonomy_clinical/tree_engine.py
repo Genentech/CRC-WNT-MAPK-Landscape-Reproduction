@@ -8,8 +8,10 @@ settings.
 
 Stage 2 (L2 "mutation group"): a single pooled tree on mutations + binarized focal CNV,
 fit against the L1-context-residualized phenotype. Serves SFig7 / Fig4b / Fig4c.
-`mega_cluster` per L2 leaf is DERIVED (majority vote of the cohort's taxonomy label
-within the leaf), not copied from the taxonomy table.
+Megaclusters are formed as in the study: Ward clustering (with optimal leaf ordering) of
+the z-scored per-leaf mean factor scores over a set of representative factors, cut into
+`N_MEGA` clusters and numbered MC1.. from left to right in the dendrogram. Every leaf
+belongs to exactly one megacluster.
 
 L1 and L2 are fit independently and are NOT nested: L2 groups span many L1 contexts.
 """
@@ -21,7 +23,7 @@ from dataclasses import dataclass, field
 
 import numpy as np
 import pandas as pd
-
+from ..methods.megaclusters import compute_megaclusters
 from ..tree_settings import TREE_SETTINGS
 
 try:
@@ -99,7 +101,7 @@ class L1Fit:
 class L2Fit:
     labels: pd.Series  # sample_id -> "L2#<leaf_id>"
     group_full: dict  # "L2#<leaf_id>" -> pipe-joined gene-status string
-    mega_cluster: dict  # "L2#<leaf_id>" -> derived (majority-vote) mega cluster
+    mega_cluster: dict  # "L2#<leaf_id>" -> "MC<k>" from clustering the leaves
     mutation_group_id: dict  # "L2#<leaf_id>" -> stable sequential int id (Fig4c)
     counts: pd.Series
     variance_explained: float
@@ -170,7 +172,6 @@ def fit_l2_tree(
     mutations: pd.DataFrame,
     focal_cnv: pd.DataFrame,
     l1_context: pd.Series,
-    mega_cluster_truth: pd.Series,
     *,
     max_leaf_nodes: int | None = None,
     min_samples_leaf: int | None = None,
@@ -204,13 +205,7 @@ def fit_l2_tree(
         for leaf_id, rule in tree.leaf_rules_.items()
     }
 
-    truth = mega_cluster_truth.reindex(leaf_ids.index)
-    mega_cluster = {}
-    for leaf_id in pd.unique(leaf_ids.to_numpy()):
-        mask = (leaf_ids == leaf_id).to_numpy()
-        votes = truth.to_numpy()[mask]
-        vals, cnts = np.unique(votes, return_counts=True)
-        mega_cluster[f"L2#{leaf_id}"] = str(vals[np.argmax(cnts)])
+    mega_cluster = compute_megaclusters(labels, factor_scores.loc[labels.index])
 
     ordered_leaves = sorted(tree.leaf_rules_.keys())
     mutation_group_id = {f"L2#{leaf_id}": i for i, leaf_id in enumerate(ordered_leaves)}

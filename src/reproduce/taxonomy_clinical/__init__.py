@@ -69,8 +69,8 @@ PROVENANCE = {
     "effect -- a logistic-regression propensity model, 1:1 nearest-neighbor caliper "
     "matching on logit(PS) and raw/matched SMD, implemented from standard PSM "
     "practice. Covariates: age, purity, msi_h, sex_male, 2 sidedness dummies "
-    "[drop-first], 5 biopsy_site dummies and one dummy per assigned megacluster (19 in "
-    "total on the deposited cohort); pooled scope "
+    "[drop-first], 5 biopsy_site dummies and 9 megacluster dummies (20 in total); "
+    "pooled scope "
     "only (no `arm` column).",
     "SFig10b": "reimplemented -- the Tier1_pooled row uses the same pooled PS/match as "
     "SFig10a (C2ST AUC via 5-fold cross-validated logistic regression); the 3 arm rows "

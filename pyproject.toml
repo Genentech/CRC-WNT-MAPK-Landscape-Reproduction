@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "crc-wnt-mapk-reproduction"
-version = "0.1.0"
+version = "0.1.1"
 description = "Synthetic-cohort reproduction of the CRC WNT-MAPK transcriptional landscape analyses."
 readme = "README.md"
 requires-python = ">=3.10"

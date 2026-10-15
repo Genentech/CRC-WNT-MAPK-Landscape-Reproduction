@@ -57,9 +57,7 @@ def _state() -> dict:
     loadings = data.load_loadings()
 
     l1 = tree_engine.fit_l1_context(factor_scores, arm_fractions, he_features)
-    l2 = tree_engine.fit_l2_tree(
-        factor_scores, mutations, focal_cnv, l1.context, taxonomy["mega_cluster"]
-    )
+    l2 = tree_engine.fit_l2_tree(factor_scores, mutations, focal_cnv, l1.context)
 
     program_meta = programs_mod.program_metadata(loadings)
     prog_scores = programs_mod.program_scores(factor_scores, loadings, z=True)

@@ -220,6 +220,26 @@ class PredictorNamesTest(unittest.TestCase):
             space_matrix(blocks, "mut_cnv")
 
 
+class MegaclusterTest(unittest.TestCase):
+    def test_every_leaf_gets_one_of_n_megaclusters(self):
+        import numpy as np
+
+        from reproduce.methods.megaclusters import compute_megaclusters
+
+        rng = np.random.default_rng(0)
+        n_leaves, per_leaf, n_factors = 30, 20, 12
+        centres = rng.normal(size=(n_leaves, n_factors)) * 3
+        rows, labels = [], []
+        for leaf in range(n_leaves):
+            rows.append(centres[leaf] + rng.normal(size=(per_leaf, n_factors)))
+            labels += [f"L2#{leaf}"] * per_leaf
+        Y = pd.DataFrame(np.vstack(rows), columns=[f"f{i}" for i in range(n_factors)])
+        labels = pd.Series(labels, index=Y.index)
+        mega = compute_megaclusters(labels, Y, n_mega=5)
+        self.assertEqual(set(mega), set(labels))
+        self.assertEqual(sorted(set(mega.values())), [f"MC{i}" for i in range(1, 6)])
+
+
 class SettingsTest(unittest.TestCase):
     def test_tree_settings(self):
         self.assertEqual(
